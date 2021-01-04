@@ -2,7 +2,7 @@ name: Gitee repos mirror periodic sync job
 
 on:
   # push推送时触发
-  #push:
+  push:
   # 定时任务触发
   schedule:
     # 每天北京时间9点跑
@@ -24,17 +24,17 @@ jobs:
 
     - name: Mirror the Github organization repos to Gitee.
       # 引用master分支的脚本支持
-      uses: phpdragon/hub-mirror-action@master
+      uses: Partme/hub-mirror-action@master
       with:
         #  需要被同步的源端账户名，如github/Superskyyy，表示Github的Superskyyy账户。
-        src: github/Superskyyy
+        src: github/Partme
         # 需要同步到的目的端账户名，如gitee/Superskyyy，表示Gitee的Superskyyy账户。
-        dst: gitee/Superskyyy
+        dst: gitee/Partme
         # 用于目的端上传代码的SSH key，用于上传代码
         dst_key: ${{ secrets.GITEE_SSH_KEY }}
         # 创建仓库的API tokens， 用于自动创建不存在的仓库
         dst_token: ${{ secrets.GITEE_TOKEN }}
-        account_type: user
+        account_type: org
         # 白名单，仅同步白名单中的repos，如“repo1,repo2,repo3”
         white_list: "hub-mirror-action,partme-backend"
         # 仅同步静态列表，不会再动态获取需同步列表（黑白名单机制依旧生效）
