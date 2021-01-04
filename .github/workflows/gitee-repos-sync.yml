@@ -3,6 +3,12 @@ name: Gitee repos mirror periodic sync job
 on:
   # push推送时触发
   push:
+    branches:
+      - dev
+      - master
+  pull_request:
+    branches:
+      - dev
   # 定时任务触发
   schedule:
     # 每天北京时间9点跑
@@ -15,12 +21,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Cache phpdragon src repos
+    - name: Cache partme src repos
       # 引用发行版的主要版本
       uses: actions/cache@v1
       with:
-        path: /home/runner/work/phpdragon/phpdragon-cache
-        key: ${{ runner.os }}-phpdragon-repos-cache
+        path: /home/runner/work/partme/partme-cache
+        key: ${{ runner.os }}-partme-repos-cache
 
     - name: Mirror the Github organization repos to Gitee.
       # 引用master分支的脚本支持
